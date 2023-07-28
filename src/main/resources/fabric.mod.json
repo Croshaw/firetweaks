@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "firetweaks",
+  "version": "${version}",
+  "name": "Fire Tweaks",
+  "description": "",
+  "authors": [
+    "Croshaw"
+  ],
+  "contact": {
+    "repo": "https://github.com/Croshaw/FireTweaks"
+  },
+  "license": "MIT",
+  "icon": "assets/firetweaks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "me.croshaw.firetweaks.client.FireTweaksClient"
+    ],
+    "main": [
+      "me.croshaw.firetweaks.FireTweaks"
+    ]
+  },
+  "mixins": [
+    "firetweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
