@@ -8,15 +8,12 @@
     "Croshaw"
   ],
   "contact": {
-    "repo": "https://github.com/Croshaw/FireTweaks"
+    "repo": "https://github.com/Croshaw/firetweaks"
   },
   "license": "MIT",
   "icon": "assets/firetweaks/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": [
-      "me.croshaw.firetweaks.client.FireTweaksClient"
-    ],
     "main": [
       "me.croshaw.firetweaks.FireTweaks"
     ]
@@ -27,6 +24,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_version}",
+    "forgeconfigapiport": "4.2.11"
   }
 }
