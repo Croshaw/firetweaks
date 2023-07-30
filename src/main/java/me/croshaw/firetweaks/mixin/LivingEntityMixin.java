@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class LivingEntityMixin {
     @Inject(method = "applyDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;setHealth(F)V"))
     private void applyDamage(DamageSource source, float amount, CallbackInfo ci) {
-        if(source.getAttacker() != null && source.getAttacker() instanceof LivingEntity livingEntity) {
+        if(source.getSource() != null && source.getSource() instanceof LivingEntity livingEntity) {
             LivingEntity thys = (LivingEntity) (Object)this;
             AttackEntityCallback.EVENT.invoker().interact(livingEntity, thys.getWorld(), livingEntity.getActiveHand(), thys, null);
         }
