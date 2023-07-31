@@ -1,0 +1,6 @@
+{
+  "parent": "firetweaks:block/template_torch",
+  "textures": {
+    "torch": "firetweaks:block/torch"
+  }
+}

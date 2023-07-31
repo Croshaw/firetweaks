@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 
 import java.util.List;
 
@@ -54,6 +55,18 @@ public class FireTweaksConfig {
     public static Integer getFireChanceWhenBurn() {
         return COMMON.fireChanceWhenBurn.get();
     }
+
+    //Torch Options
+    public static Integer getLitTorchFuel() {
+        return COMMON.litTorchFuel.get();
+    }
+    public static Integer getSmolderingTorchFuel() {
+        return COMMON.smolderingTorchFuel.get();
+    }
+    public static Double getChanceExtinguishByRain() {
+        return COMMON.chanceExtinguishByRain.get();
+    }
+
     public static class CommonConfig {
         private final IntValue hitDuration;
         private final ConfigValue<List<? extends String>> extraTorchItems;
@@ -69,6 +82,12 @@ public class FireTweaksConfig {
         private final IntValue fireChanceByAllowItems;
         private final BooleanValue allowHitByBurnEntity;
         private final IntValue fireChanceWhenBurn;
+
+        //Torch Options
+        private final IntValue litTorchFuel;
+        private final IntValue smolderingTorchFuel;
+        private final DoubleValue chanceExtinguishByRain;
+
         public CommonConfig(ForgeConfigSpec.Builder builder) {
             int maxDuration = Enchantments.FIRE_ASPECT.getMaxLevel() * 4;
             hitDuration = builder.comment("Fire damage duration for direct (main hand) hits.").defineInRange("hit duration", 4, 1, maxDuration);
@@ -153,6 +172,9 @@ public class FireTweaksConfig {
             fireChanceByAllowItems = builder.comment("Chance (in percentage) for torches/candles to set targets on fire.").defineInRange("fire Chance By Allow Items", 100, 1, 100);
             allowHitByBurnEntity = builder.comment("EMPTY").define("allow Hit By Burn Entity", true);
             fireChanceWhenBurn = builder.comment("EMPTY").defineInRange("fire Chance When Burn", 100, 1, 100);
+            litTorchFuel = builder.comment("EMPTY").defineInRange("lit torch fuel", 600, 60, 999999999);
+            smolderingTorchFuel = builder.comment("EMPTY").defineInRange("lit torch fuel", 60, 5, 999999999);
+            chanceExtinguishByRain = builder.comment("EMPTY").defineInRange("chance Extinguish By Rain", 1d, 0d, 100d);
         }
     }
 }

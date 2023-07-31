@@ -1,0 +1,29 @@
+{
+  "parent": "item/generated",
+  "overrides": [
+    {
+      "predicate": {
+        "state": 0
+      },
+      "model": "firetweaks:block/torch_off"
+    },
+    {
+      "predicate": {
+        "state": 1
+      },
+      "model": "firetweaks:block/torch"
+    },
+    {
+      "predicate": {
+        "state": 2
+      },
+      "model": "firetweaks:block/torch_smoldering"
+    },
+    {
+      "predicate": {
+        "state": 3
+      },
+      "model": "firetweaks:block/torch_burnt"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "firetweaks:block/template_wall_torch",
+  "textures": {
+    "torch": "firetweaks:block/torch_off"
+  }
+}

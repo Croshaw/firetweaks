@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,burnablestate=unlit": {
+      "model": "firetweaks:block/wall_torch_off"
+    },
+    "facing=east,burnablestate=lit": {
+      "model": "firetweaks:block/wall_torch"
+    },
+    "facing=east,burnablestate=smoldering": {
+      "model": "firetweaks:block/wall_torch_smoldering"
+    },
+    "facing=east,burnablestate=burnt": {
+      "model": "firetweaks:block/wall_torch_burnt"
+    },
+    "facing=north,burnablestate=unlit": {
+      "model": "firetweaks:block/wall_torch_off",
+      "y": 270
+    },
+    "facing=north,burnablestate=lit": {
+      "model": "firetweaks:block/wall_torch",
+      "y": 270
+    },
+    "facing=north,burnablestate=smoldering": {
+      "model": "firetweaks:block/wall_torch_smoldering",
+      "y": 270
+    },
+    "facing=north,burnablestate=burnt": {
+      "model": "firetweaks:block/wall_torch_burnt",
+      "y": 270
+    },
+    "facing=south,burnablestate=unlit": {
+      "model": "firetweaks:block/wall_torch_off",
+      "y": 90
+    },
+    "facing=south,burnablestate=lit": {
+      "model": "firetweaks:block/wall_torch",
+      "y": 90
+    },
+    "facing=south,burnablestate=smoldering": {
+      "model": "firetweaks:block/wall_torch_smoldering",
+      "y": 90
+    },
+    "facing=south,burnablestate=burnt": {
+      "model": "firetweaks:block/wall_torch_burnt",
+      "y": 90
+    },
+    "facing=west,burnablestate=unlit": {
+      "model": "firetweaks:block/wall_torch_off",
+      "y": 180
+    },
+    "facing=west,burnablestate=lit": {
+      "model": "firetweaks:block/wall_torch",
+      "y": 180
+    },
+    "facing=west,burnablestate=smoldering": {
+      "model": "firetweaks:block/wall_torch_smoldering",
+      "y": 180
+    },
+    "facing=west,burnablestate=burnt": {
+      "model": "firetweaks:block/wall_torch_burnt",
+      "y": 180
+    }
+  }
+}

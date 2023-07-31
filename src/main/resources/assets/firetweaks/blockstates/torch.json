@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "burnablestate=unlit": {
+      "model": "firetweaks:block/torch_off"
+    },
+    "burnablestate=lit": {
+      "model": "firetweaks:block/torch"
+    },
+    "burnablestate=smoldering": {
+      "model": "firetweaks:block/torch_smoldering"
+    },
+    "burnablestate=burnt": {
+      "model": "firetweaks:block/torch_burnt"
+    }
+  }
+}

@@ -14,6 +14,9 @@
   "icon": "assets/firetweaks/icon.png",
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "me.croshaw.firetweaks.client.FireTweaksClient"
+    ],
     "main": [
       "me.croshaw.firetweaks.FireTweaks"
     ]

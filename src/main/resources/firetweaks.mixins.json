@@ -14,7 +14,8 @@
     "ArrowItemMixin",
     "CandleBlockMixin",
     "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ItemEntityMixin"
   ],
   "client": [
   ],

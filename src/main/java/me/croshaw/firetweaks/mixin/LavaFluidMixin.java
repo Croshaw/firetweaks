@@ -17,14 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LavaFluidMixin {
     @Shadow protected abstract void playExtinguishEvent(WorldAccess world, BlockPos pos);
 
-    @Inject(method = "onRandomTick", at = @At("TAIL"))
+    @Inject(method = "onRandomTick", at = @At("HEAD"), cancellable = true)
     private void onRandomTick(World world, BlockPos pos, FluidState state, Random random, CallbackInfo ci) {
-        if(!world.isClient() && (isRainingAround(world, pos) || isRainingAround(world, pos.up()))) {
+        if(!world.isClient() && world.hasRain(pos.up())) {
             world.setBlockState(pos, Blocks.STONE.getDefaultState());
             this.playExtinguishEvent(world, pos);
+            ci.cancel();
         }
-    }
-    private boolean isRainingAround(World world, BlockPos pos) {
-        return world.hasRain(pos) || world.hasRain(pos.west()) || world.hasRain(pos.east()) || world.hasRain(pos.north()) || world.hasRain(pos.south());
     }
 }
