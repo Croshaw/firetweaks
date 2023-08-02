@@ -9,19 +9,19 @@
     },
     {
       "predicate": {
-        "state": 1
+        "state": 0.25
       },
       "model": "firetweaks:block/torch"
     },
     {
       "predicate": {
-        "state": 2
+        "state": 0.5
       },
       "model": "firetweaks:block/torch_smoldering"
     },
     {
       "predicate": {
-        "state": 3
+        "state": 0.75
       },
       "model": "firetweaks:block/torch_burnt"
     }

@@ -1,0 +1,25 @@
+{
+  "type": "firetweaks:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "firetweaks:torch",
+      "data": {
+        "Burnable State": 1
+      }
+    },
+    "X": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "item": "firetweaks:lantern",
+    "data": {
+      "Fuel": 600
+    }
+  }
+}

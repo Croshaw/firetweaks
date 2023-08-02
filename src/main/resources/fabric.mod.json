@@ -29,5 +29,6 @@
     "fabric": "*",
     "minecraft": "${minecraft_version}",
     "forgeconfigapiport": "4.2.11"
-  }
+  },
+  "accessWidener": "firetweaks.accesswidener"
 }

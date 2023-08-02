@@ -27,7 +27,7 @@ public class CampfireBlockMixin {
     }
 
     @Inject(method = "onEntityCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-    private void getPlacementState(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
+    private void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
         entity.setOnFireFor(world.getRandom().nextInt(6));
     }
 }

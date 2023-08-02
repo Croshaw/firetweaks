@@ -1,30 +1,45 @@
 package me.croshaw.firetweaks.item;
 
 import me.croshaw.firetweaks.config.FireTweaksConfig;
-import me.croshaw.firetweaks.registry.BlocksRegistry;
 import me.croshaw.firetweaks.util.FireTweaksProp;
 import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.FireBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
 import net.minecraft.item.WallStandingBlockItem;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class FixitWallStandingBlockItem extends WallStandingBlockItem {
-    public FixitWallStandingBlockItem(Block standingBlock, Block wallBlock, Settings settings) {
-        super(standingBlock, wallBlock, settings);
+    public FixitWallStandingBlockItem(Block standingBlock, Block wallBlock) {
+        super(standingBlock, wallBlock, new Settings());
     }
 
     @Override
     public ItemStack getDefaultStack() {
         return StacksUtil.modifyStack(super.getDefaultStack(), FireTweaksProp.UNLIT);
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        System.out.printf((world.isClient ?"Client:" :"Server:")+"%s\n", StacksUtil.getBlockStateFromStack(stack).asString());
+        if(StacksUtil.getBlockStateFromStack(stack) == FireTweaksProp.BURNT) {
+            ItemStack giveStack = new ItemStack(Items.STICK, 4);
+            if (!user.giveItemStack(giveStack))
+                user.dropStack(giveStack);
+            stack.decrement(1);
+            TypedActionResult.success(stack,true);
+        }
+        return TypedActionResult.pass(stack);
     }
 
     @Override

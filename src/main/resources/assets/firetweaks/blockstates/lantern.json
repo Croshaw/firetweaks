@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "unfireable_lit=true,hanging=true": {
+      "model": "firetweaks:block/lantern_hanging"
+    },
+    "unfireable_lit=true,hanging=false": {
+      "model": "firetweaks:block/lantern"
+    },
+    "unfireable_lit=false,hanging=true": {
+      "model": "firetweaks:block/lantern_hanging_off"
+    },
+    "unfireable_lit=false,hanging=false": {
+      "model": "firetweaks:block/lantern_off"
+    }
+  }
+}

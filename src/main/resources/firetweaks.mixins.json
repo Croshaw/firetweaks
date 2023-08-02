@@ -15,7 +15,8 @@
     "CandleBlockMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
-    "ItemEntityMixin"
+    "ItemEntityMixin",
+    "IngredientMixin"
   ],
   "client": [
   ],

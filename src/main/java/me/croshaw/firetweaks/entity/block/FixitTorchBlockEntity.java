@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class FixitTorchBlockEntity extends FuelBlockEntity {
     public FixitTorchBlockEntity(BlockPos pos, BlockState state) {
         super(BlocksRegistry.FIXIT_TORCH_BLOCK_ENTITY, pos, state);
-        fuel = FireTweaksConfig.getLitTorchFuel()*20;
+        fuel = state.get(FixitTorchBlock.BURNABLESTATE) == FireTweaksProp.SMOLDERING ? FireTweaksConfig.getSmolderingTorchFuel()*20 : state.get(FixitTorchBlock.BURNABLESTATE) == FireTweaksProp.BURNT ? 0 : FireTweaksConfig.getLitTorchFuel()*20;
     }
 
     public static void litServerTick(World world, BlockPos pos, BlockState state, FixitTorchBlockEntity fixitTorch) {

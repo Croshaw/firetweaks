@@ -1,18 +1,19 @@
 package me.croshaw.firetweaks.handlers;
 
 import me.croshaw.firetweaks.config.FireTweaksConfig;
+import me.croshaw.firetweaks.registry.BlocksRegistry;
+import me.croshaw.firetweaks.util.FireTweaksProp;
+import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class AttackEntityHandler {
@@ -99,7 +100,7 @@ public class AttackEntityHandler {
         return ItemType.NONE;
     }
     private static boolean isTorch(ItemStack stack) {
-        return (stack.isOf(Items.TORCH) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraTorchItems().contains(getKey(stack.getItem())) || isSoulTorch(stack);
+        return ((stack.isOf(Items.TORCH) || (stack.isOf(BlocksRegistry.TORCH_ITEM) && StacksUtil.getBlockStateFromStack(stack) == FireTweaksProp.LIT)) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraTorchItems().contains(StacksUtil.getKey(stack.getItem())) || isSoulTorch(stack);
     }
 
     private static boolean isCandle(ItemStack stack) {
@@ -107,14 +108,10 @@ public class AttackEntityHandler {
     }
 
     private static boolean isFlammable(ItemStack stack) {
-        return FireTweaksConfig.getAllowFlammableItems() && FireTweaksConfig.getExtraFlammableItems().contains(getKey(stack.getItem()));
+        return FireTweaksConfig.getAllowFlammableItems() && FireTweaksConfig.getExtraFlammableItems().contains(StacksUtil.getKey(stack.getItem()));
     }
 
     private static boolean isSoulTorch(ItemStack stack) {
-        return (stack.isOf(Items.SOUL_TORCH) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraSoulTorchItems().contains(getKey(stack.getItem()));
-    }
-
-    private static String getKey(Item item) {
-        return Registry.ITEM.getKey(item).get().getValue().toString();
+        return (stack.isOf(Items.SOUL_TORCH) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraSoulTorchItems().contains(StacksUtil.getKey(stack.getItem()));
     }
 }

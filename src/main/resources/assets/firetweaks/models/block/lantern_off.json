@@ -1,0 +1,6 @@
+{
+  "parent": "firetweaks:block/template_lantern",
+  "textures": {
+    "lantern": "firetweaks:block/lantern_off"
+  }
+}

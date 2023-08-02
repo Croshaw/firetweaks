@@ -1,0 +1,22 @@
+{
+  "type": "firetweaks:crafting_shaped",
+  "pattern": [
+    "#",
+    "/"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "firetweaks:torch",
+    "data": {
+      "Burnable State": 1
+    },
+    "count": 4
+  }
+}

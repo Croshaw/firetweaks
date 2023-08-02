@@ -4,8 +4,8 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 import java.util.List;
 
@@ -173,7 +173,7 @@ public class FireTweaksConfig {
             allowHitByBurnEntity = builder.comment("EMPTY").define("allow Hit By Burn Entity", true);
             fireChanceWhenBurn = builder.comment("EMPTY").defineInRange("fire Chance When Burn", 100, 1, 100);
             litTorchFuel = builder.comment("EMPTY").defineInRange("lit torch fuel", 600, 60, 999999999);
-            smolderingTorchFuel = builder.comment("EMPTY").defineInRange("lit torch fuel", 60, 5, 999999999);
+            smolderingTorchFuel = builder.comment("EMPTY").defineInRange("smoldering Torch Fuel", 60, 5, 999999999);
             chanceExtinguishByRain = builder.comment("EMPTY").defineInRange("chance Extinguish By Rain", 1d, 0d, 100d);
         }
     }
