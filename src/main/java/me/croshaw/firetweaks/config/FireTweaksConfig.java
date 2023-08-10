@@ -1,6 +1,8 @@
 package me.croshaw.firetweaks.config;
 
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -8,6 +10,7 @@ import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 
 import java.util.List;
+import java.util.Map;
 
 public class FireTweaksConfig {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -55,6 +58,9 @@ public class FireTweaksConfig {
     public static Integer getFireChanceWhenBurn() {
         return COMMON.fireChanceWhenBurn.get();
     }
+    public static Integer getArrowFireChance() {
+        return COMMON.arrowFireChance.get();
+    }
 
     //Torch Options
     public static Integer getLitTorchFuel() {
@@ -65,6 +71,15 @@ public class FireTweaksConfig {
     }
     public static Double getChanceExtinguishByRain() {
         return COMMON.chanceExtinguishByRain.get();
+    }
+
+    //
+    public static List<? extends String> getFuelItemsBlackList() {
+        return COMMON.fuelItemsBlackList.get();
+    }
+
+    public static Map<Item, Integer> getFuelItems() {
+        return COMMON.fuelItems;
     }
 
     public static class CommonConfig {
@@ -82,11 +97,16 @@ public class FireTweaksConfig {
         private final IntValue fireChanceByAllowItems;
         private final BooleanValue allowHitByBurnEntity;
         private final IntValue fireChanceWhenBurn;
+        private final IntValue arrowFireChance;
 
         //Torch Options
         private final IntValue litTorchFuel;
         private final IntValue smolderingTorchFuel;
         private final DoubleValue chanceExtinguishByRain;
+
+        //
+        private final ConfigValue<List<? extends String>> fuelItemsBlackList;
+        private final Map<Item, Integer> fuelItems;
 
         public CommonConfig(ForgeConfigSpec.Builder builder) {
             int maxDuration = Enchantments.FIRE_ASPECT.getMaxLevel() * 4;
@@ -169,12 +189,21 @@ public class FireTweaksConfig {
                             "Effective only if [fire chance] and at least one of [consume torch] and [consume candle] are set different from default."
                     )
                     .define("consume without fire", false);
-            fireChanceByAllowItems = builder.comment("Chance (in percentage) for torches/candles to set targets on fire.").defineInRange("fire Chance By Allow Items", 100, 1, 100);
-            allowHitByBurnEntity = builder.comment("EMPTY").define("allow Hit By Burn Entity", true);
-            fireChanceWhenBurn = builder.comment("EMPTY").defineInRange("fire Chance When Burn", 100, 1, 100);
+            fireChanceByAllowItems = builder.comment("Chance (in percentage) for torches/candles to set targets on fire.").defineInRange("fire chance by allow items", 100, 1, 100);
+            allowHitByBurnEntity = builder.comment("EMPTY").define("allow hit by burn entity", true);
+            fireChanceWhenBurn = builder.comment("EMPTY").defineInRange("fire chance when burn", 100, 1, 100);
+            arrowFireChance = builder.comment("EMPTY").defineInRange("arrow fire chance", 50, 1, 100);
             litTorchFuel = builder.comment("EMPTY").defineInRange("lit torch fuel", 600, 60, 999999999);
-            smolderingTorchFuel = builder.comment("EMPTY").defineInRange("smoldering Torch Fuel", 60, 5, 999999999);
-            chanceExtinguishByRain = builder.comment("EMPTY").defineInRange("chance Extinguish By Rain", 1d, 0d, 100d);
+            smolderingTorchFuel = builder.comment("EMPTY").defineInRange("smoldering torch fuel", 60, 5, 999999999);
+            chanceExtinguishByRain = builder.comment("EMPTY").defineInRange("chance extinguish by rain", 1d, 0d, 100d);
+            fuelItemsBlackList = builder.comment("Empty").defineListAllowEmpty(
+                    List.of("fuel items black list"),
+                    () -> List.of(
+                            "minecraft:lava_bucket"
+                    ),
+                    (element) -> element instanceof String && !((String) element).isBlank()
+            );
+            fuelItems = FurnaceBlockEntity.createFuelTimeMap();
         }
     }
 }

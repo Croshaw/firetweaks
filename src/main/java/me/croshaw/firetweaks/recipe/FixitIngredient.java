@@ -25,9 +25,7 @@ public class FixitIngredient {
                 if (jsonArray.size() == 0) {
                     throw new JsonSyntaxException("Item array cannot be empty, at least one item must be defined");
                 } else {
-                    return Ingredient.ofEntries(StreamSupport.stream(jsonArray.spliterator(), false).map((jsonElement) -> {
-                        return entryFromJson(JsonHelper.asObject(jsonElement, "item"));
-                    }));
+                    return Ingredient.ofEntries(StreamSupport.stream(jsonArray.spliterator(), false).map((jsonElement) -> entryFromJson(JsonHelper.asObject(jsonElement, "item"))));
                 }
             } else {
                 throw new JsonSyntaxException("Expected item to be object or array of objects");

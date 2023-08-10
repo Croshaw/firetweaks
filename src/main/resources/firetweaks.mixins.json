@@ -16,7 +16,8 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ItemEntityMixin",
-    "IngredientMixin"
+    "IngredientMixin",
+    "ShapedRecipeInvoker"
   ],
   "client": [
   ],

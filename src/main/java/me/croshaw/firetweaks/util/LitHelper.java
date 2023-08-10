@@ -12,8 +12,13 @@ public class LitHelper {
         return state.contains(Properties.LIT) && !state.get(Properties.LIT);
     }
 
-    private static boolean canCustomLit(BlockState state) {
-        return state.contains(FixitTorchBlock.BURNABLESTATE) && state.get(FixitTorchBlock.BURNABLESTATE) == FireTweaksProp.UNLIT;
+    public static boolean canBeLit(BlockState state) {
+        if(!state.contains(FixitTorchBlock.BURNABLESTATE)) return false;
+        return switch (state.get(FixitTorchBlock.BURNABLESTATE)) {
+            case UNLIT -> true;
+            case SMOLDERING -> true;
+            default -> false;
+        };
     }
 
     public static void LitBlocksAround(ServerWorld world, BlockPos pos) {
@@ -26,8 +31,10 @@ public class LitHelper {
             BlockState state = world.getBlockState(newPos);
             if (canLit(state)) {
                 world.setBlockState(newPos, state.with(Properties.LIT, true), 11);
-            } else if(canCustomLit(state))
+            } else if(canBeLit(state))
                 world.setBlockState(newPos, state.with(FixitTorchBlock.BURNABLESTATE, FireTweaksProp.LIT), 11);
         }
     }
+
+
 }

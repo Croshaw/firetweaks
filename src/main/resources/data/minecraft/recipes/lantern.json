@@ -1,5 +1,25 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [{"item": "minecraft:air"}],
-  "result": {"item": "minecraft:barrier"}
+  "type": "firetweaks:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "firetweaks:torch",
+      "data": {
+        "Burnable State": 0
+      }
+    },
+    "X": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "result": {
+    "item": "firetweaks:lantern",
+    "data": {
+      "Fuel": 0
+    }
+  }
 }

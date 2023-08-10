@@ -1,13 +1,16 @@
 package me.croshaw.firetweaks.block;
 
+import me.croshaw.firetweaks.config.FireTweaksConfig;
 import me.croshaw.firetweaks.entity.block.FixitLanternBlockEntity;
 import me.croshaw.firetweaks.entity.block.FuelBlockEntity;
 import me.croshaw.firetweaks.registry.BlocksRegistry;
 import me.croshaw.firetweaks.util.StacksUtil;
+import net.fabricmc.fabric.impl.content.registry.FuelRegistryImpl;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.FurnaceBlockEntity;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
@@ -15,6 +18,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.screen.slot.FurnaceFuelSlot;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -40,8 +45,16 @@ public class FixitLanternBlock extends BlockWithEntity implements Waterloggable 
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        //добавить возможность заправлять
-        if(player.isSneaky() && world.getBlockEntity(pos) instanceof FuelBlockEntity fuelBlockEntity && fuelBlockEntity.getFuel() > 0) {
+        ItemStack stack = player.getStackInHand(hand);
+        if(!FireTweaksConfig.getFuelItemsBlackList().contains(StacksUtil.getKey(stack.getItem())) && FireTweaksConfig.getFuelItems().containsKey(stack.getItem()) && world.getBlockEntity(pos) instanceof FuelBlockEntity fuelBlockEntity) {
+            if(fuelBlockEntity.getFuel() < BlocksRegistry.LANTERN_ITEM.maxFuel) {
+                int tempFuel = FireTweaksConfig.getFuelItems().get(stack.getItem());
+                int fuel = BlocksRegistry.LANTERN_ITEM.maxFuel <= tempFuel+fuelBlockEntity.getFuel() ? BlocksRegistry.LANTERN_ITEM.maxFuel-(int)fuelBlockEntity.getFuel() : tempFuel;
+                StacksUtil.consumeStack(stack, player, hand);
+                fuelBlockEntity.incrementFuel(fuel);
+                return ActionResult.success(true);
+            }
+        } else if(player.isSneaky() && world.getBlockEntity(pos) instanceof FuelBlockEntity fuelBlockEntity && fuelBlockEntity.getFuel() > 0) {
             world.setBlockState(pos, state.with(UNFIREABLE_LIT, !state.get(UNFIREABLE_LIT)));
             return ActionResult.success(true);
         }

@@ -2,12 +2,22 @@ package me.croshaw.firetweaks.util;
 
 import me.croshaw.firetweaks.FireTweaks;
 import me.croshaw.firetweaks.registry.BlocksRegistry;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Hand;
 import net.minecraft.util.registry.Registry;
 
 public class StacksUtil {
+
+    public static void consumeStack(ItemStack stack, PlayerEntity player, Hand hand) {
+        if(stack.isDamageable()) {
+            stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+        } else {
+            stack.decrement(1);
+        }
+    }
 
     public static boolean isLit(ItemStack stack) {
         NbtCompound nbt = stack.getOrCreateNbt();
@@ -24,6 +34,13 @@ public class StacksUtil {
             return nbt.getLong(FireTweaks.NBT_FUEL_KEY);
         return 0;
     }
+
+    public static void addFuel(ItemStack stack, int amount) {
+        long curFuel = getFuel(stack);
+        curFuel+=amount;
+        stack.getOrCreateNbt().putLong(FireTweaks.NBT_FUEL_KEY, curFuel);
+    }
+
     public static ItemStack createStack(FireTweaksProp burnableState) {
         ItemStack stack = new ItemStack(BlocksRegistry.TORCH_ITEM, 1);
         return modifyStack(stack, burnableState);
@@ -35,16 +52,6 @@ public class StacksUtil {
         catch (Exception exception) {
             return def;
         }
-    }
-
-    public static ItemStack modifyStack(ItemStack stack, int burnableState) {
-        switch (burnableState) {
-            case 0 -> stack.getOrCreateNbt().putInt(FireTweaks.NBT_ITEM_KEY, 0);
-            case 1 -> stack.getOrCreateNbt().putInt(FireTweaks.NBT_ITEM_KEY, 1);
-            case 2 -> stack.getOrCreateNbt().putInt(FireTweaks.NBT_ITEM_KEY, 2);
-            case 3 -> stack.getOrCreateNbt().putInt(FireTweaks.NBT_ITEM_KEY, 3);
-        }
-        return stack;
     }
 
     public static ItemStack modifyStack(ItemStack stack, FireTweaksProp burnableState) {

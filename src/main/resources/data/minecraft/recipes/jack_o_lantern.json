@@ -1,25 +1,21 @@
 {
   "type": "firetweaks:crafting_shaped",
   "key": {
-    "#": {
+    "A": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "B": {
       "item": "firetweaks:torch",
       "data": {
         "Burnable State": 1
       }
-    },
-    "X": {
-      "item": "minecraft:iron_nugget"
     }
   },
   "pattern": [
-    "XXX",
-    "X#X",
-    "XXX"
+    "A",
+    "B"
   ],
   "result": {
-    "item": "firetweaks:lantern",
-    "data": {
-      "Fuel": 1000
-    }
+    "item": "minecraft:jack_o_lantern"
   }
 }

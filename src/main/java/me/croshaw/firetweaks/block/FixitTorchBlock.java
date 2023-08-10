@@ -1,8 +1,11 @@
 package me.croshaw.firetweaks.block;
 
+import me.croshaw.firetweaks.config.FireTweaksConfig;
 import me.croshaw.firetweaks.entity.block.FixitTorchBlockEntity;
+import me.croshaw.firetweaks.entity.block.FuelBlockEntity;
 import me.croshaw.firetweaks.registry.BlocksRegistry;
 import me.croshaw.firetweaks.util.FireTweaksProp;
+import me.croshaw.firetweaks.util.LitHelper;
 import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -12,12 +15,18 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -72,6 +81,24 @@ public class FixitTorchBlock extends BlockWithEntity {
         if (state.get(BURNABLESTATE) == FireTweaksProp.LIT && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             entity.damage(DamageSource.IN_FIRE, this.fireDamage);
         }
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        ItemStack stack = player.getStackInHand(hand);
+        if(state.get(BURNABLESTATE) == FireTweaksProp.LIT && stack.isEmpty()) {
+            world.setBlockState(pos, state.with(BURNABLESTATE, FireTweaksProp.UNLIT));
+            return ActionResult.success(true);
+        } else if(LitHelper.canBeLit(state)) {
+            if(stack.isOf(Items.FLINT_AND_STEEL)) {
+                stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+                world.setBlockState(pos, state.with(BURNABLESTATE, FireTweaksProp.LIT));
+                if(world.getBlockEntity(pos) instanceof FuelBlockEntity fuelBlockEntity)
+                    fuelBlockEntity.setFuel(FireTweaksConfig.getLitTorchFuel()*20);
+                return ActionResult.success(true);
+            }
+        }
+        return ActionResult.PASS;
     }
 
     @Override
