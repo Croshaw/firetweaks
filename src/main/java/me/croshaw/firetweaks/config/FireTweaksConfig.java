@@ -77,9 +77,18 @@ public class FireTweaksConfig {
     public static List<? extends String> getFuelItemsBlackList() {
         return COMMON.fuelItemsBlackList.get();
     }
-
     public static Map<Item, Integer> getFuelItems() {
         return COMMON.fuelItems;
+    }
+
+    public static Boolean getSimulateFlintAndSteel() {
+        return COMMON.simulateFlintAndSteel.get();
+    }
+    public static Integer getFireStarterChanceOfArson() {
+        return COMMON.fireStarterChanceOfArson.get();
+    }
+    public static List<? extends String> getLightItems() {
+        return COMMON.lightItems.get();
     }
 
     public static class CommonConfig {
@@ -107,6 +116,9 @@ public class FireTweaksConfig {
         //
         private final ConfigValue<List<? extends String>> fuelItemsBlackList;
         private final Map<Item, Integer> fuelItems;
+        private final BooleanValue simulateFlintAndSteel;
+        private final IntValue fireStarterChanceOfArson;
+        private final ConfigValue<List<? extends String>> lightItems;
 
         public CommonConfig(ForgeConfigSpec.Builder builder) {
             int maxDuration = Enchantments.FIRE_ASPECT.getMaxLevel() * 4;
@@ -204,6 +216,15 @@ public class FireTweaksConfig {
                     (element) -> element instanceof String && !((String) element).isBlank()
             );
             fuelItems = FurnaceBlockEntity.createFuelTimeMap();
+            simulateFlintAndSteel = builder.comment("EMPTY").define("simulate flint and steel", true);
+            fireStarterChanceOfArson = builder.comment("EMPTY").defineInRange("fire starter chance of arson", 50, 1, 100);
+            lightItems = builder.comment("Empty").defineListAllowEmpty(
+                    List.of("light Items"),
+                    () -> List.of(
+                            "minecraft:flint_and_steel"
+                    ),
+                    (element) -> element instanceof String && !((String) element).isBlank()
+            );
         }
     }
 }

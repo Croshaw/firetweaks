@@ -90,8 +90,8 @@ public class FixitTorchBlock extends BlockWithEntity {
             world.setBlockState(pos, state.with(BURNABLESTATE, FireTweaksProp.UNLIT));
             return ActionResult.success(true);
         } else if(LitHelper.canBeLit(state)) {
-            if(stack.isOf(Items.FLINT_AND_STEEL)) {
-                stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+            if(FireTweaksConfig.getLightItems().contains(StacksUtil.getKey(stack.getItem()))) {
+                StacksUtil.consumeStack(stack, player, hand);
                 world.setBlockState(pos, state.with(BURNABLESTATE, FireTweaksProp.LIT));
                 if(world.getBlockEntity(pos) instanceof FuelBlockEntity fuelBlockEntity)
                     fuelBlockEntity.setFuel(FireTweaksConfig.getLitTorchFuel()*20);

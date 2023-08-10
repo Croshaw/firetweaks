@@ -2,8 +2,6 @@ package me.croshaw.firetweaks.registry;
 
 import me.croshaw.firetweaks.FireTweaks;
 import me.croshaw.firetweaks.recipe.FixitShapedRecipe;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeMatcher;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.registry.Registry;

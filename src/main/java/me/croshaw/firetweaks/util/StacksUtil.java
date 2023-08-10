@@ -1,7 +1,7 @@
 package me.croshaw.firetweaks.util;
 
 import me.croshaw.firetweaks.FireTweaks;
-import me.croshaw.firetweaks.registry.BlocksRegistry;
+import me.croshaw.firetweaks.registry.ItemsRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class StacksUtil {
     }
 
     public static ItemStack createStack(FireTweaksProp burnableState) {
-        ItemStack stack = new ItemStack(BlocksRegistry.TORCH_ITEM, 1);
+        ItemStack stack = new ItemStack(ItemsRegistry.TORCH_ITEM, 1);
         return modifyStack(stack, burnableState);
     }
     public static int getOrDefault(ItemStack stack, int def){

@@ -1,7 +1,7 @@
 package me.croshaw.firetweaks.handlers;
 
 import me.croshaw.firetweaks.config.FireTweaksConfig;
-import me.croshaw.firetweaks.registry.BlocksRegistry;
+import me.croshaw.firetweaks.registry.ItemsRegistry;
 import me.croshaw.firetweaks.util.FireTweaksProp;
 import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.entity.Entity;
@@ -100,7 +100,7 @@ public class AttackEntityHandler {
         return ItemType.NONE;
     }
     private static boolean isTorch(ItemStack stack) {
-        return ((stack.isOf(Items.TORCH) || (stack.isOf(BlocksRegistry.TORCH_ITEM) && StacksUtil.getBlockStateFromStack(stack) == FireTweaksProp.LIT)) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraTorchItems().contains(StacksUtil.getKey(stack.getItem())) || isSoulTorch(stack);
+        return ((stack.isOf(Items.TORCH) || (stack.isOf(ItemsRegistry.TORCH_ITEM) && StacksUtil.getBlockStateFromStack(stack) == FireTweaksProp.LIT)) && FireTweaksConfig.getVanillaTorchesEnabled()) || FireTweaksConfig.getExtraTorchItems().contains(StacksUtil.getKey(stack.getItem())) || isSoulTorch(stack);
     }
 
     private static boolean isCandle(ItemStack stack) {

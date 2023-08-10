@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.JsonHelper;
 
 public class JsonItemStackParser {
     public static void modifyNbtByJson(JsonObject json, ItemStack stack) {

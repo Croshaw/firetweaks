@@ -11,6 +11,7 @@ public class ModRegistry {
         ModLoadingContext.registerConfig(FireTweaks.MOD_ID, ModConfig.Type.COMMON, FireTweaksConfig.SPEC);
         EventsRegistry.registry();
         BlocksRegistry.registry();
+        ItemsRegistry.registry();
         LootRegistry.registry();
         RecipesRegistry.registry();
     }

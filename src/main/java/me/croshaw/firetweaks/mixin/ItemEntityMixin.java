@@ -1,6 +1,6 @@
 package me.croshaw.firetweaks.mixin;
 
-import me.croshaw.firetweaks.registry.BlocksRegistry;
+import me.croshaw.firetweaks.registry.ItemsRegistry;
 import me.croshaw.firetweaks.util.FireTweaksProp;
 import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.entity.Entity;
@@ -26,7 +26,7 @@ public abstract class ItemEntityMixin extends Entity {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
-        if(this.getStack().isOf(BlocksRegistry.TORCH_ITEM)){
+        if(this.getStack().isOf(ItemsRegistry.TORCH_ITEM)){
             if(this.touchingWater && StacksUtil.getBlockStateFromStack(this.getStack()) == FireTweaksProp.LIT) {
                 StacksUtil.modifyStack(this.getStack(), FireTweaksProp.UNLIT);
                 if(!world.isClient())

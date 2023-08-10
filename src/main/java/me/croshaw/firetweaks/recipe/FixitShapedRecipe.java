@@ -1,9 +1,9 @@
 package me.croshaw.firetweaks.recipe;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import com.google.gson.*;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import me.croshaw.firetweaks.mixin.ShapedRecipeInvoker;
 import me.croshaw.firetweaks.registry.RecipesRegistry;
 import me.croshaw.firetweaks.util.JsonItemStackParser;
@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class FixitShapedRecipe extends ShapedRecipe {
 

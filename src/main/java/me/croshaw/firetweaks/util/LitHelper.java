@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class LitHelper {
-    private static boolean canLit(BlockState state) {
+    public static boolean canLit(BlockState state) {
         return state.contains(Properties.LIT) && !state.get(Properties.LIT);
     }
 

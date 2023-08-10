@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import me.croshaw.firetweaks.FireTweaks;
 import me.croshaw.firetweaks.block.FixitLanternBlock;
 import me.croshaw.firetweaks.entity.block.FuelBlockEntity;
-import me.croshaw.firetweaks.registry.BlocksRegistry;
+import me.croshaw.firetweaks.registry.ItemsRegistry;
 import me.croshaw.firetweaks.registry.LootRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class LanternLootFunction extends ConditionalLootFunction {
 
     @Override
     protected ItemStack process(ItemStack stack, LootContext context) {
-        ItemStack stack1 = new ItemStack(BlocksRegistry.LANTERN_ITEM, 1);
+        ItemStack stack1 = new ItemStack(ItemsRegistry.LANTERN_ITEM, 1);
         BlockEntity blockEntity = context.get(LootContextParameters.BLOCK_ENTITY);
         if(blockEntity instanceof FuelBlockEntity fuelBlockEntity)
             stack1.getOrCreateNbt().putLong(FireTweaks.NBT_FUEL_KEY, fuelBlockEntity.getFuel());

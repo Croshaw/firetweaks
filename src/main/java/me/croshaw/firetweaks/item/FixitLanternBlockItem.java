@@ -2,7 +2,6 @@ package me.croshaw.firetweaks.item;
 
 import me.croshaw.firetweaks.FireTweaks;
 import me.croshaw.firetweaks.config.FireTweaksConfig;
-import me.croshaw.firetweaks.registry.BlocksRegistry;
 import me.croshaw.firetweaks.util.StacksUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +9,6 @@ import net.minecraft.inventory.StackReference;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ClickType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
