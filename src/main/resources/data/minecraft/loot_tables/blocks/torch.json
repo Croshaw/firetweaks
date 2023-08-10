@@ -11,7 +11,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "firetweaks:torch"
+          "name": "minecraft:air"
+        }
+      ],
+      "functions": [
+        {
+          "function": "firetweaks:torch"
         }
       ],
       "rolls": 1.0

@@ -12,10 +12,15 @@ import net.minecraft.util.registry.Registry;
 public class StacksUtil {
 
     public static void consumeStack(ItemStack stack, PlayerEntity player, Hand hand) {
+        consumeStack(stack, player, hand, false);
+    }
+
+    public static void consumeStack(ItemStack stack, PlayerEntity player, Hand hand, boolean random) {
+        int dmgAmount = random ? player.getRandom().nextBetween(1, 10) : 1;
         if(stack.isDamageable()) {
-            stack.damage(1, player, p -> p.sendToolBreakStatus(hand));
+            stack.damage(dmgAmount, player, p -> p.sendToolBreakStatus(hand));
         } else {
-            stack.decrement(1);
+            stack.decrement(dmgAmount);
         }
     }
 

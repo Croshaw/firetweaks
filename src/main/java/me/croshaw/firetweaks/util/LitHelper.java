@@ -14,9 +14,11 @@ public class LitHelper {
 
     public static boolean canBeLit(BlockState state) {
         if(!state.contains(FixitTorchBlock.BURNABLESTATE)) return false;
-        return switch (state.get(FixitTorchBlock.BURNABLESTATE)) {
-            case UNLIT -> true;
-            case SMOLDERING -> true;
+        return canBeLit(state.get(FixitTorchBlock.BURNABLESTATE));
+    }
+    public static boolean canBeLit(FireTweaksProp prop) {
+        return switch (prop) {
+            case UNLIT, SMOLDERING -> true;
             default -> false;
         };
     }
